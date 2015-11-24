@@ -10,9 +10,8 @@
 		2C237FF11C04D5EC004E6916 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C237FF01C04D5EC004E6916 /* main.m */; };
 		2C237FF41C04D5EC004E6916 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C237FF31C04D5EC004E6916 /* AppDelegate.m */; };
 		2C237FF71C04D5EC004E6916 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C237FF61C04D5EC004E6916 /* ViewController.m */; };
-		2C237FFA1C04D5EC004E6916 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C237FF81C04D5EC004E6916 /* Main.storyboard */; };
 		2C237FFC1C04D5EC004E6916 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C237FFB1C04D5EC004E6916 /* Assets.xcassets */; };
-		2C237FFF1C04D5EC004E6916 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C237FFD1C04D5EC004E6916 /* LaunchScreen.storyboard */; };
+		2C23800D1C04D929004E6916 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C23800C1C04D929004E6916 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,10 +21,9 @@
 		2C237FF31C04D5EC004E6916 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		2C237FF51C04D5EC004E6916 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		2C237FF61C04D5EC004E6916 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		2C237FF91C04D5EC004E6916 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2C237FFB1C04D5EC004E6916 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		2C237FFE1C04D5EC004E6916 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2C2380001C04D5EC004E6916 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2C23800C1C04D929004E6916 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,9 +60,8 @@
 				2C237FF31C04D5EC004E6916 /* AppDelegate.m */,
 				2C237FF51C04D5EC004E6916 /* ViewController.h */,
 				2C237FF61C04D5EC004E6916 /* ViewController.m */,
-				2C237FF81C04D5EC004E6916 /* Main.storyboard */,
 				2C237FFB1C04D5EC004E6916 /* Assets.xcassets */,
-				2C237FFD1C04D5EC004E6916 /* LaunchScreen.storyboard */,
+				2C23800C1C04D929004E6916 /* LaunchScreen.storyboard */,
 				2C2380001C04D5EC004E6916 /* Info.plist */,
 				2C237FEF1C04D5EC004E6916 /* Supporting Files */,
 			);
@@ -136,9 +133,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C237FFF1C04D5EC004E6916 /* LaunchScreen.storyboard in Resources */,
 				2C237FFC1C04D5EC004E6916 /* Assets.xcassets in Resources */,
-				2C237FFA1C04D5EC004E6916 /* Main.storyboard in Resources */,
+				2C23800D1C04D929004E6916 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,25 +152,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		2C237FF81C04D5EC004E6916 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2C237FF91C04D5EC004E6916 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		2C237FFD1C04D5EC004E6916 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2C237FFE1C04D5EC004E6916 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		2C2380011C04D5EC004E6916 /* Debug */ = {
@@ -262,6 +239,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = WhereIveBeen/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ivanzez.WhereIveBeen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -273,6 +251,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = WhereIveBeen/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ivanzez.WhereIveBeen;
 				PRODUCT_NAME = "$(TARGET_NAME)";

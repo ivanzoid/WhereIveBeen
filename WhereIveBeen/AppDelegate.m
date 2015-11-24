@@ -7,17 +7,49 @@
 //
 
 #import "AppDelegate.h"
+#import "ViewController.h"
 
-@interface AppDelegate ()
+#import <CoreLocation/CoreLocation.h>
 
+@interface AppDelegate () <CLLocationManagerDelegate>
 @end
 
-@implementation AppDelegate
+@implementation AppDelegate {
+    CLLocationManager *_locationManager;
+}
 
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    ViewController *viewController = [ViewController new];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    self.window.rootViewController = navigationController;
+    [self.window makeKeyAndVisible];
+
+    [self startLocationMonitoring];
+
     return YES;
+}
+
+- (void) startLocationMonitoring
+{
+    _locationManager = [CLLocationManager new];
+    _locationManager.delegate = self;
+
+    [_locationManager startMonitoringSignificantLocationChanges];
+}
+
+#pragma mark - <CLLocationManagerDelegate>
+
+- (void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
+{
+
+}
+
+- (void) locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
