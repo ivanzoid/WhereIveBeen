@@ -11,6 +11,23 @@
 
 #import <CoreLocation/CoreLocation.h>
 
+static NSString * const kGpxFileHeader_1param =
+@"<gpx xmlns=\"http://www.topografix.com/GPX/1/1\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" version=\"1.1\" creator=\"Where I've Been - http://zoid.cc\" xsi:schemaLocation=\"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd\">\n"
+@" <trk>\n"
+@"  <name>%@</name>\n"
+@"  <trkseg>\n";
+
+static NSString * const kGpxFileFooter =
+@"   </trkseg>\n"
+@" </trk>\n"
+@"</gpx>\n";
+
+static NSString * const kGpxPointTemplate_4params =
+@"    <trkpt lon=\"%f\" lat=\"%f\">\n"
+@"     <ele>%f</ele>\n"
+@"     <time>%@</time>\n"
+@"    </trkpt>\n";
+
 @interface AppDelegate () <CLLocationManagerDelegate>
 @end
 
