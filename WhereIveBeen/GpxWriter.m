@@ -49,6 +49,10 @@ static NSString * const kCreator = @"Where I've Been app";
 
     NSData *pointData = [self pointDataForLocation:location];
     [fileHandle writeData:pointData];
+
+    NSData *footerData = [self footerData];
+    [fileHandle writeData:footerData];
+
     [fileHandle closeFile];
 }
 
@@ -64,6 +68,7 @@ static NSString * const kCreator = @"Where I've Been app";
 - (NSData *) pointDataForLocation:(CLLocation *)location
 {
     NSString *pointString = [NSString stringWithFormat:kGpxPointTemplate_4params, location.coordinate.longitude, location.coordinate.latitude, location.altitude, [self iso8601DateStringForDate:location.timestamp]];
+
     NSData *pointData = [pointString dataUsingEncoding:NSUTF8StringEncoding];
     return pointData;
 }
@@ -103,55 +108,73 @@ static NSString * const kCreator = @"Where I've Been app";
     return cachesUrls[0];
 }
 
-- (NSURL *) pathToCurrentFile
+- (NSString *) documentsDirectory
 {
-    NSURL *documentsDirectoryUrl = [self documentsDirectoryUrl];
-    NSURL *pathToCurrentFile = [documentsDirectoryUrl URLByAppendingPathComponent:[self currentFileName]];
+    NSArray *documentsDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [documentsDirectories count] ? documentsDirectories[0] : @"";
+    return documentsDirectory;
+}
+
+- (NSString *) pathToCurrentFile
+{
+    NSString *documentsDirectory = [self documentsDirectory];
+    NSString *pathToCurrentFile = [documentsDirectory stringByAppendingPathComponent:[self currentFileName]];
     return pathToCurrentFile;
 }
 
-- (NSFileHandle *) createGpxFileAt:(NSURL *)path
+- (NSFileHandle *) createGpxFileAt:(NSString *)path
 {
-    NSError *error = nil;
-    NSFileHandle *fileHandle = [NSFileHandle fileHandleForWritingToURL:path error:&error];
+    if (![[NSFileManager defaultManager] createFileAtPath:path contents:[NSData data] attributes:nil]) {
+        return nil;
+    }
+
+    NSFileHandle *fileHandle = [NSFileHandle fileHandleForWritingAtPath:path];
+    if (!fileHandle) {
+        return nil;
+    }
 
     NSData *headerData = [self headerDataWithCreator:kCreator name:[self currentDateString]];
     [fileHandle writeData:headerData];
 
-    NSData *footerData = [self footerData];
-    [fileHandle writeData:footerData];
-
-    [fileHandle seekToFileOffset:[headerData length]];
+    NSLog(@"Created file at %@ (fileHandle = %@)", path, fileHandle);
 
     return fileHandle;
 }
 
-- (unsigned long long) sizeOfFileAtPath:(NSURL *)path
+- (unsigned long long) sizeOfFileAtPath:(NSString *)path
 {
     NSError *error = nil;
-    NSDictionary<NSString *, id> *fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:[path absoluteString] error:&error];
+    NSDictionary<NSString *, id> *fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:path error:&error];
 
     NSNumber *fileSize = fileAttributes[NSFileSize];
+
+    NSLog(@"Size of file at %@ = %llu", path, [fileSize unsignedLongLongValue]);
+
     return [fileSize unsignedLongLongValue];
 }
 
 - (NSFileHandle *) fileHandleForWritingNewPoint
 {
-    NSURL *pathToCurrentFile = [self pathToCurrentFile];
+    NSString *pathToCurrentFile = [self pathToCurrentFile];
     NSFileManager *fileManager = [NSFileManager defaultManager];
 
     NSFileHandle *fileHandle = nil;
 
-    if (![fileManager fileExistsAtPath:[pathToCurrentFile absoluteString]]) {
+    NSError *error = nil;
+
+    if (![fileManager fileExistsAtPath:pathToCurrentFile]) {
         fileHandle = [self createGpxFileAt:pathToCurrentFile];
     } else {
-        NSError *error = nil;
-        fileHandle = [NSFileHandle fileHandleForWritingToURL:pathToCurrentFile error:&error];
-        unsigned long long fileSize = [self sizeOfFileAtPath:pathToCurrentFile];
-        [fileHandle seekToFileOffset:fileSize - _footerLength];
+        fileHandle = [NSFileHandle fileHandleForWritingAtPath:pathToCurrentFile];
+        if (fileHandle) {
+            unsigned long long truncateOffset = [self sizeOfFileAtPath:pathToCurrentFile] - _footerLength;
+            [fileHandle truncateFileAtOffset:truncateOffset];
+            NSLog(@"Opened file at %@, truncated at offset %llu", pathToCurrentFile, truncateOffset);
+        }
     }
 
-    if (!fileHandle) {
+    if (fileHandle == nil) {
+        NSLog(@"Can't open or create file at %@: %@", pathToCurrentFile, error);
         return nil;
     }
 

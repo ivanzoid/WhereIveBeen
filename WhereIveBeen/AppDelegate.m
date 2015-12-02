@@ -44,7 +44,13 @@
 
 - (void) startLocationMonitoring
 {
-    [_locationManager startMonitoringSignificantLocationChanges];
+    if ([_locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
+        NSLog(@"Requesting always authorization.");
+        [_locationManager requestAlwaysAuthorization];
+    } else {
+        NSLog(@"Starting monitoring significant location changes.");
+        [_locationManager startMonitoringSignificantLocationChanges];
+    }
 }
 
 - (void) setupGpxWriter
@@ -53,6 +59,15 @@
 }
 
 #pragma mark - <CLLocationManagerDelegate>
+
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
+    if (status == kCLAuthorizationStatusAuthorizedAlways) {
+        NSLog(@"Always authorization confirmed.");
+        NSLog(@"Starting monitoring significant location changes.");
+        [_locationManager startMonitoringSignificantLocationChanges];
+    }
+}
 
 - (void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
 {
@@ -63,7 +78,7 @@
 
 - (void) locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
-
+    NSLog(@"locationManager didFailWithError: %@", error);
 }
 
 @end

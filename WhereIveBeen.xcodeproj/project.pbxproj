@@ -25,6 +25,7 @@
 		2C135DEB1C0DFBB6004D0966 /* DispatchQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DispatchQueue.h; sourceTree = "<group>"; };
 		2C135DEC1C0DFBB6004D0966 /* DispatchQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DispatchQueue.m; sourceTree = "<group>"; };
 		2C135DED1C0DFBB6004D0966 /* DispatchUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DispatchUtils.h; sourceTree = "<group>"; };
+		2C135DF01C0EA15B004D0966 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		2C237FEC1C04D5EC004E6916 /* WhereIveBeen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhereIveBeen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C237FF01C04D5EC004E6916 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2C237FF21C04D5EC004E6916 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -97,6 +98,7 @@
 				2C237FEF1C04D5EC004E6916 /* Supporting Files */,
 				2C135DE31C0DF89B004D0966 /* GpxWriter.h */,
 				2C135DE41C0DF89B004D0966 /* GpxWriter.m */,
+				2C135DF01C0EA15B004D0966 /* PrefixHeader.pch */,
 			);
 			path = WhereIveBeen;
 			sourceTree = "<group>";
@@ -140,6 +142,12 @@
 				TargetAttributes = {
 					2C237FEB1C04D5EC004E6916 = {
 						CreatedOnToolsVersion = 7.1.1;
+						DevelopmentTeam = LWE95KBD82;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -274,6 +282,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = WhereIveBeen/PrefixHeader.pch;
 				INFOPLIST_FILE = WhereIveBeen/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -286,6 +297,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = WhereIveBeen/PrefixHeader.pch;
 				INFOPLIST_FILE = WhereIveBeen/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
