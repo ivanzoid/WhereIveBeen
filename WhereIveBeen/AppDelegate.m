@@ -8,31 +8,16 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
+#import "GpxWriter.h"
 
 #import <CoreLocation/CoreLocation.h>
-
-static NSString * const kGpxFileHeader_1param =
-@"<gpx xmlns=\"http://www.topografix.com/GPX/1/1\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" version=\"1.1\" creator=\"Where I've Been - http://zoid.cc\" xsi:schemaLocation=\"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd\">\n"
-@" <trk>\n"
-@"  <name>%@</name>\n"
-@"  <trkseg>\n";
-
-static NSString * const kGpxFileFooter =
-@"   </trkseg>\n"
-@" </trk>\n"
-@"</gpx>\n";
-
-static NSString * const kGpxPointTemplate_4params =
-@"    <trkpt lon=\"%f\" lat=\"%f\">\n"
-@"     <ele>%f</ele>\n"
-@"     <time>%@</time>\n"
-@"    </trkpt>\n";
 
 @interface AppDelegate () <CLLocationManagerDelegate>
 @end
 
 @implementation AppDelegate {
     CLLocationManager *_locationManager;
+    GpxWriter *_gpxWriter;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -44,51 +29,41 @@ static NSString * const kGpxPointTemplate_4params =
     self.window.rootViewController = navigationController;
     [self.window makeKeyAndVisible];
 
+    [self setupLocationManager];
+    [self setupGpxWriter];
     [self startLocationMonitoring];
 
     return YES;
 }
 
-- (void) startLocationMonitoring
+- (void) setupLocationManager
 {
     _locationManager = [CLLocationManager new];
     _locationManager.delegate = self;
+}
 
+- (void) startLocationMonitoring
+{
     [_locationManager startMonitoringSignificantLocationChanges];
+}
+
+- (void) setupGpxWriter
+{
+    _gpxWriter = [GpxWriter new];
 }
 
 #pragma mark - <CLLocationManagerDelegate>
 
 - (void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
 {
-
+    for (CLLocation *location in locations) {
+        [_gpxWriter writeLocation:location];
+    }
 }
 
 - (void) locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
 
-}
-
-- (void)applicationWillResignActive:(UIApplication *)application {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-}
-
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
 @end

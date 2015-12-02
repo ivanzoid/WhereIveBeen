@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C135DE51C0DF89B004D0966 /* GpxWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C135DE41C0DF89B004D0966 /* GpxWriter.m */; };
+		2C135DEE1C0DFBB6004D0966 /* DispatchGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C135DEA1C0DFBB6004D0966 /* DispatchGroup.m */; };
+		2C135DEF1C0DFBB6004D0966 /* DispatchQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C135DEC1C0DFBB6004D0966 /* DispatchQueue.m */; };
 		2C237FF11C04D5EC004E6916 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C237FF01C04D5EC004E6916 /* main.m */; };
 		2C237FF41C04D5EC004E6916 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C237FF31C04D5EC004E6916 /* AppDelegate.m */; };
 		2C237FF71C04D5EC004E6916 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C237FF61C04D5EC004E6916 /* ViewController.m */; };
@@ -15,6 +18,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C135DE31C0DF89B004D0966 /* GpxWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GpxWriter.h; sourceTree = "<group>"; };
+		2C135DE41C0DF89B004D0966 /* GpxWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GpxWriter.m; sourceTree = "<group>"; };
+		2C135DE91C0DFBB6004D0966 /* DispatchGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DispatchGroup.h; sourceTree = "<group>"; };
+		2C135DEA1C0DFBB6004D0966 /* DispatchGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DispatchGroup.m; sourceTree = "<group>"; };
+		2C135DEB1C0DFBB6004D0966 /* DispatchQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DispatchQueue.h; sourceTree = "<group>"; };
+		2C135DEC1C0DFBB6004D0966 /* DispatchQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DispatchQueue.m; sourceTree = "<group>"; };
+		2C135DED1C0DFBB6004D0966 /* DispatchUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DispatchUtils.h; sourceTree = "<group>"; };
 		2C237FEC1C04D5EC004E6916 /* WhereIveBeen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhereIveBeen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C237FF01C04D5EC004E6916 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2C237FF21C04D5EC004E6916 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -37,6 +47,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2C135DE71C0DFBB6004D0966 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				2C135DE81C0DFBB6004D0966 /* DispatchUtils */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		2C135DE81C0DFBB6004D0966 /* DispatchUtils */ = {
+			isa = PBXGroup;
+			children = (
+				2C135DE91C0DFBB6004D0966 /* DispatchGroup.h */,
+				2C135DEA1C0DFBB6004D0966 /* DispatchGroup.m */,
+				2C135DEB1C0DFBB6004D0966 /* DispatchQueue.h */,
+				2C135DEC1C0DFBB6004D0966 /* DispatchQueue.m */,
+				2C135DED1C0DFBB6004D0966 /* DispatchUtils.h */,
+			);
+			path = DispatchUtils;
+			sourceTree = "<group>";
+		};
 		2C237FE31C04D5EC004E6916 = {
 			isa = PBXGroup;
 			children = (
@@ -56,6 +86,7 @@
 		2C237FEE1C04D5EC004E6916 /* WhereIveBeen */ = {
 			isa = PBXGroup;
 			children = (
+				2C135DE71C0DFBB6004D0966 /* Utils */,
 				2C237FF21C04D5EC004E6916 /* AppDelegate.h */,
 				2C237FF31C04D5EC004E6916 /* AppDelegate.m */,
 				2C237FF51C04D5EC004E6916 /* ViewController.h */,
@@ -64,6 +95,8 @@
 				2C23800C1C04D929004E6916 /* LaunchScreen.storyboard */,
 				2C2380001C04D5EC004E6916 /* Info.plist */,
 				2C237FEF1C04D5EC004E6916 /* Supporting Files */,
+				2C135DE31C0DF89B004D0966 /* GpxWriter.h */,
+				2C135DE41C0DF89B004D0966 /* GpxWriter.m */,
 			);
 			path = WhereIveBeen;
 			sourceTree = "<group>";
@@ -147,7 +180,10 @@
 			files = (
 				2C237FF71C04D5EC004E6916 /* ViewController.m in Sources */,
 				2C237FF41C04D5EC004E6916 /* AppDelegate.m in Sources */,
+				2C135DE51C0DF89B004D0966 /* GpxWriter.m in Sources */,
+				2C135DEE1C0DFBB6004D0966 /* DispatchGroup.m in Sources */,
 				2C237FF11C04D5EC004E6916 /* main.m in Sources */,
+				2C135DEF1C0DFBB6004D0966 /* DispatchQueue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,6 +313,7 @@
 				2C2380051C04D5EC004E6916 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
